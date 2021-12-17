@@ -3,24 +3,26 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@craco/craco": "^6.4.3",
     "@testing-library/jest-dom": "^5.16.1",
     "@testing-library/react": "^12.1.2",
     "@testing-library/user-event": "^13.5.0",
+    "normalize.css": "^8.0.1",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-scripts": "5.0.0",
     "web-vitals": "^2.1.2"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
+    "start": "craco start",
+    "build": "craco build",
+    "test": "craco test",
     "eject": "react-scripts eject",
     "prettier": "prettier --write .",
     "eslint": "eslint src --ext .js,jsx --fix",
     "commitlint": "npm run eslint && npm run prettier",
     "prepare": "husky install",
-    "commit":"cz"
+    "commit": "cz"
   },
   "browserslist": {
     "production": [
@@ -41,10 +43,8 @@
     "commitizen": "^4.2.4",
     "cz-conventional-changelog": "^3.3.0",
     "eslint": "^8.4.1",
-    "eslint-config-airbnb": "^19.0.2",
     "eslint-config-alloy": "^4.4.0",
     "eslint-config-prettier": "^8.3.0",
-    "eslint-plugin-jsx-a11y": "^6.5.1",
     "eslint-plugin-prettier": "^4.0.0",
     "eslint-plugin-react": "^7.27.1",
     "husky": "^7.0.0",

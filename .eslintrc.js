@@ -5,9 +5,7 @@ module.exports = {
     //
     browser: true,
     node: true,
-    mocha: true,
-    jest: true,
-    // jquery: true
+    es6: true,
   },
   globals: {
     // Your global variables (setting to false means it's not allowed to be reassigned)
@@ -16,8 +14,7 @@ module.exports = {
   },
   rules: {
     // Customize your rules
-    // "@typescript-eslint/explicit-member-accessibility": 0,
-    // "@typescript-eslint/explicit-function-return-type": 0
+    allowNamedFunctions: 0,
   },
   settings: {
     react: {

@@ -1,6 +1,4 @@
-import React from 'react';
-
-export default function App() {
-  // let aaa = '123';
-  return <div>my app</div>;
-}
+import React, { memo } from 'react';
+export default memo(() => {
+  return <div>124124124</div>;
+});
