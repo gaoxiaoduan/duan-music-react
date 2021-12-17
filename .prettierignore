@@ -1,0 +1,13 @@
+/dist/*
+/node_modules/**
+/public/*
+.vscode
+
+**/*.md
+**/*.svg
+**/*.ejs
+**/*.html
+**/*.sh
+
+package.json
+package-lock.json
