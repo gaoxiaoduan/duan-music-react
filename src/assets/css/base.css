@@ -1,4 +1,6 @@
+@import '~antd/dist/antd.css';
 @import '~normalize.css';
+
 
 /* 样式的重置 */
 body,
@@ -35,12 +37,11 @@ li {
 
 a {
   text-decoration: none;
-  color: #666;
+  color: #ccc;
 }
 
 a:hover {
-  color: #666;
-  text-decoration: underline;
+  color: #ccc;
 }
 
 i,
