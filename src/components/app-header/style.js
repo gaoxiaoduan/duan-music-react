@@ -38,6 +38,7 @@ export const HeaderLeft = styled.div`
         height: 70px;
         line-height: 70px;
         text-align: center;
+        text-decoration: none;
 
         &:hover {
           background-color: #000;

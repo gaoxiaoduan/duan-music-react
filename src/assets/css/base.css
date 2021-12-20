@@ -1,7 +1,6 @@
 @import '~antd/dist/antd.css';
 @import '~normalize.css';
 
-
 /* 样式的重置 */
 body,
 html,
@@ -42,6 +41,7 @@ a {
 
 a:hover {
   color: #ccc;
+  text-decoration: underline;
 }
 
 i,
