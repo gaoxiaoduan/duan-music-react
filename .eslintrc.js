@@ -14,6 +14,7 @@ module.exports = {
   rules: {
     // Customize your rules
     'prefer-arrow-callback': 0,
+    'no-unused-vars': 0,
   },
   settings: {
     react: {

@@ -1,4 +1,4 @@
-import React, { memo } from 'react';
+import React, { memo, Suspense } from 'react';
 
 import { HashRouter } from 'react-router-dom';
 import { renderRoutes } from 'react-router-config';
@@ -10,7 +10,7 @@ import AppFooter from '@/components/app-footer';
 export default memo(() => (
   <HashRouter>
     <AppHeader />
-    {renderRoutes(routers)}
+    <Suspense fallback={<div>loading...</div>}>{renderRoutes(routers)}</Suspense>
     <AppFooter />
   </HashRouter>
 ));

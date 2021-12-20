@@ -1,17 +1,18 @@
 import styled from 'styled-components';
 
 export const HeaderWrapperStyles = styled.div`
-  height: 70px;
+  height: 75px;
   font-size: 14px;
   background-color: #242424;
+
+  .content {
+    display: flex;
+    justify-content: space-between;
+  }
 
   .bar {
     height: 5px;
     background-color: #c20c0c;
-  }
-  .content {
-    display: flex;
-    justify-content: space-between;
   }
 `;
 
@@ -61,6 +62,10 @@ export const HeaderLeft = styled.div`
           top: 20px;
           right: -15px;
         }
+      }
+
+      .icon {
+        display: none;
       }
 
       .active .icon {

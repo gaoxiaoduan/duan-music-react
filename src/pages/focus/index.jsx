@@ -1,5 +1,5 @@
 import React, { memo } from 'react';
 
-export default memo(function index() {
+export default memo(function Focus() {
   return <div>关注</div>;
 });

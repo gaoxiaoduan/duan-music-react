@@ -11,7 +11,7 @@ const AppHeader = () => {
   const showItem = (item, index) => {
     if (index < 3) {
       return (
-        <NavLink to={item.link} exact>
+        <NavLink to={item.link}>
           {item.title}
           <i className="sprite_01 icon">&nbsp;</i>
         </NavLink>
