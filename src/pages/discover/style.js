@@ -2,8 +2,9 @@ import styled from 'styled-components';
 
 export const DiscoverWrapper = styled.div`
   .top {
-    height: 25px;
+    height: 30px;
     background-color: #c20c0c;
+    border-bottom: 1px solid #a40011;
   }
 `;
 
@@ -13,6 +14,7 @@ export const TopMenu = styled.div`
   position: relative;
 
   .item {
+    margin-top: 2px;
     a {
       display: inline-block;
       height: 20px;

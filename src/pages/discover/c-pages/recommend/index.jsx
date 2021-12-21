@@ -1,25 +1,35 @@
-import React, { memo, useEffect } from 'react';
-import { connect } from 'react-redux';
+import React, { memo } from 'react';
 
-import { getBannerAction } from './store/actionCreators';
+import TopBanner from './c-pages/topBanner';
+import { RecommendWrapper } from './style';
 
 function Recommend(props) {
-  const { getBanners, topBanners } = props;
-  useEffect(() => {
-    getBanners();
-  }, [getBanners]);
-
-  return <div>Recommend{topBanners.length}</div>;
+  return (
+    <RecommendWrapper>
+      <TopBanner />
+    </RecommendWrapper>
+  );
 }
 
-const mapStateToProps = (state) => ({
-  topBanners: state.recommend.topBanners,
-});
+export default memo(Recommend);
 
-const mapDispatchToProps = (dispatch) => ({
-  getBanners: () => {
-    dispatch(getBannerAction());
-  },
-});
+// function Recommend(props) {
+//   const { getBanners, topBanners } = props;
+//   useEffect(() => {
+//     getBanners();
+//   }, [getBanners]);
 
-export default connect(mapStateToProps, mapDispatchToProps)(memo(Recommend));
+//   return <div>Recommend{topBanners.length}</div>;
+// }
+
+// const mapStateToProps = (state) => ({
+//   topBanners: state.recommend.topBanners,
+// });
+
+// const mapDispatchToProps = (dispatch) => ({
+//   getBanners: () => {
+//     dispatch(getBannerAction());
+//   },
+// });
+
+// export default connect(mapStateToProps, mapDispatchToProps)(memo(Recommend));
