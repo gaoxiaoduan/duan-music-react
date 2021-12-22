@@ -3,6 +3,7 @@ import styled from 'styled-components';
 export const RecommendWrapper = styled.div``;
 
 export const Content = styled.div`
+  border: 1px solid #d3d3d3;
   background-color: #fff;
   display: flex;
 `;
@@ -14,6 +15,5 @@ export const RecommendLeft = styled.div`
 
 export const RecommendRight = styled.div`
   width: 250px;
-  border: 1px solid #d3d3d3;
-  border-width: 0 1px;
+  border-left: 1px solid #d3d3d3;
 `;
