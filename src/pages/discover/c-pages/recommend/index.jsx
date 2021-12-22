@@ -1,12 +1,25 @@
 import React, { memo } from 'react';
 
-import TopBanner from './c-pages/topBanner';
-import { RecommendWrapper } from './style';
+import TopBanner from './c-pages/top-Banner';
+import HotRecommed from './c-pages/hot-Recommed';
+import NewAblum from './c-pages/new-ablum';
+import RankingList from './c-pages/ranking-list';
+import { RecommendWrapper, Content, RecommendLeft, RecommendRight } from './style';
 
 function Recommend(props) {
   return (
     <RecommendWrapper>
       <TopBanner />
+
+      <Content className="wrap-v2">
+        <RecommendLeft>
+          <HotRecommed />
+          <NewAblum />
+          <RankingList />
+        </RecommendLeft>
+
+        <RecommendRight>RecommendRight</RecommendRight>
+      </Content>
     </RecommendWrapper>
   );
 }

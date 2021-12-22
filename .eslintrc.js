@@ -13,8 +13,12 @@ module.exports = {
   },
   rules: {
     // Customize your rules
-    'prefer-arrow-callback': 0,
+    'prefer-arrow-callback': 0, //比较喜欢箭头回调
+    'arrow-parens': 0, //箭头函数用小括号括起来
+    'arrow-spacing': 0, //=>的前/后括号
     'no-unused-vars': 0,
+    'no-debugger': 2, //禁用debugger
+    'react/jsx-key': 2, //在数组或迭代器中验证JSX具有key属性
   },
   settings: {
     react: {
