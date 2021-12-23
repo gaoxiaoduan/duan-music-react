@@ -35,3 +35,16 @@ export function getTopList(id) {
     },
   });
 }
+
+// 歌手分类列表
+export function getArtistList(limit, type = -1, area = -1, initial = -1) {
+  return request({
+    url: '/artist/list',
+    params: {
+      limit,
+      type,
+      area,
+      initial,
+    },
+  });
+}

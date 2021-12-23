@@ -5,3 +5,6 @@ export const CHANGE_NEW_ALBUM = 'recommend/CHANGE_NEW_ALBUM';
 export const CHANGE_UP_RANKING_LIST = 'recommend/CHANGE_UP_RANKING_LIST';
 export const CHANGE_NEW_SONG_LIST = 'recommend/CHANGE_NEW_SONG_LIST';
 export const CHANGE_ORIGIN_LIST = 'recommend/CHANGE_ORIGIN_LIST';
+
+export const CHANGE_ARTIST_LIST = 'recommend/CHANGE_ARTIST_LIST';
+

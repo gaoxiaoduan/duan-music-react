@@ -163,3 +163,7 @@ span:hover.link {
   text-decoration: underline;
   cursor: pointer;
 }
+
+.m0Auto {
+  margin: 0 auto;
+}

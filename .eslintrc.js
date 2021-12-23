@@ -19,6 +19,7 @@ module.exports = {
     'no-unused-vars': 0,
     'no-debugger': 2, //禁用debugger
     'react/jsx-key': 2, //在数组或迭代器中验证JSX具有key属性
+    'max-params': 0, // 参数最大个数
   },
   settings: {
     react: {

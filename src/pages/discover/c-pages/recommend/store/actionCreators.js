@@ -1,7 +1,7 @@
 import * as actionTypes from './constants';
 import * as rankingID from '@/common/constants';
 
-import { getTopBanner, getHotRecommend, getNewAlbum, getTopList } from '@/services/recommend';
+import { getTopBanner, getHotRecommend, getNewAlbum, getTopList, getArtistList } from '@/services/recommend';
 
 const changeBannerAction = (res) => ({
   type: actionTypes.CHANGE_TOP_BANNER,
@@ -31,6 +31,11 @@ const changeNewSongListAction = (res) => ({
 const changeOriginListAction = (res) => ({
   type: actionTypes.CHANGE_ORIGIN_LIST,
   originList: res.playlist,
+});
+
+const changeArtistListAction = (res) => ({
+  type: actionTypes.CHANGE_ARTIST_LIST,
+  artistList: res.artists,
 });
 
 export const getBannerAction = () => {
@@ -72,6 +77,14 @@ export const getTopListAction = (id) => {
           break;
         default:
       }
+    });
+  };
+};
+
+export const getArtistListAction = (limit, type, area, initial) => {
+  return (dispatch) => {
+    getArtistList(limit, type, area, initial).then((res) => {
+      dispatch(changeArtistListAction(res));
     });
   };
 };

@@ -1,9 +1,7 @@
 import React, { memo } from 'react';
 
-import TopBanner from './c-pages/top-Banner';
-import HotRecommed from './c-pages/hot-Recommed';
-import NewAblum from './c-pages/new-ablum';
-import RankingList from './c-pages/ranking-list';
+import { TopBanner, HotRecommed, NewAblum, RankingList, UserLogin, HotAnchor, InSinger } from './c-pages';
+
 import { RecommendWrapper, Content, RecommendLeft, RecommendRight } from './style';
 
 function Recommend(props) {
@@ -18,7 +16,11 @@ function Recommend(props) {
           <RankingList />
         </RecommendLeft>
 
-        <RecommendRight>RecommendRight</RecommendRight>
+        <RecommendRight>
+          <UserLogin />
+          <HotAnchor />
+          <InSinger />
+        </RecommendRight>
       </Content>
     </RecommendWrapper>
   );
@@ -26,6 +28,7 @@ function Recommend(props) {
 
 export default memo(Recommend);
 
+// TODO: 最初引入的redux代码
 // function Recommend(props) {
 //   const { getBanners, topBanners } = props;
 //   useEffect(() => {

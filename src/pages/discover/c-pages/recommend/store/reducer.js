@@ -9,6 +9,8 @@ const defaultState = Map({
   upRankingList: [],
   newSongList: [],
   originList: [],
+
+  artistList: [],
 });
 
 export default (state = defaultState, active) => {
@@ -26,6 +28,9 @@ export default (state = defaultState, active) => {
       return state.set('newSongList', active.newSongList);
     case actionTypes.CHANGE_ORIGIN_LIST:
       return state.set('originList', active.originList);
+
+    case actionTypes.CHANGE_ARTIST_LIST:
+      return state.set('artistList', active.artistList);
     default:
       return state;
   }
