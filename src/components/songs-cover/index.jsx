@@ -6,14 +6,11 @@ import { ThemeCoverWrapper } from './style';
 
 export default memo(function SongsCover(props) {
   const { info, right, isRecommend = false } = props;
-
+  console.log(info);
   return (
     <ThemeCoverWrapper right={right}>
       <div className="cover-top">
-        <img
-          src={getSizeImage(info.picUrl || info.coverImgUrl, 140)}
-          alt={info.copywriter || info.creator.nickname || '图片介绍'}
-        />
+        <img src={getSizeImage(info?.picUrl || info?.coverImgUrl, 140)} alt={info?.name || '图片介绍'} />
         <div className="cover sprite_covor">
           <div className="info sprite_covor">
             <span>
@@ -25,7 +22,9 @@ export default memo(function SongsCover(props) {
         </div>
       </div>
       <div className={isRecommend ? 'cover-bottom' : 'cover-bottom text-nowrap'}>{info.name}</div>
-      {!isRecommend && <div className="cover-source text-nowrap">by {info.copywriter || info.creator.nickname}</div>}
+      {!isRecommend && (
+        <div className="cover-source text-nowrap">by {info?.copywriter || info?.creator?.nickname || ''}</div>
+      )}
     </ThemeCoverWrapper>
   );
 });
