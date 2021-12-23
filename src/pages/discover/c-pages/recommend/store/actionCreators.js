@@ -1,4 +1,5 @@
 import * as actionTypes from './constants';
+import * as rankingID from '@/common/constants';
 
 import { getTopBanner, getHotRecommend, getNewAlbum, getTopList } from '@/services/recommend';
 
@@ -14,7 +15,7 @@ const changeHotRecommedAction = (res) => ({
 
 const changeNewAlbumAction = (res) => ({
   type: actionTypes.CHANGE_NEW_ALBUM,
-  newAlbums: res.albums,
+  newAlbums: res.weekData,
 });
 
 const changeUpRankingListAction = (res) => ({
@@ -56,17 +57,17 @@ export const getNewAlbumAction = (limit = 10, offset = 0) => {
   };
 };
 
-export const getTopListAction = (idx) => {
+export const getTopListAction = (id) => {
   return (dispatch) => {
-    getTopList(idx).then((res) => {
-      switch (idx) {
-        case 0:
+    getTopList(id).then((res) => {
+      switch (id) {
+        case rankingID.NEWSONGLISTID:
           dispatch(changeNewSongListAction(res));
           break;
-        case 2:
+        case rankingID.ORIGINLISTID:
           dispatch(changeOriginListAction(res));
           break;
-        case 3:
+        case rankingID.UPRANKINGLISTID:
           dispatch(changeUpRankingListAction(res));
           break;
         default:

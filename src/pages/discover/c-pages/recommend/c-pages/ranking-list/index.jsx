@@ -1,6 +1,7 @@
 import React, { memo, useEffect } from 'react';
 import { useDispatch, useSelector, shallowEqual } from 'react-redux';
 import { getTopListAction } from '../../store/actionCreators';
+import * as rankingID from '@/common/constants';
 
 import ThemeHeaderRCM from '@/components/theme-header-rcm';
 import TopRanking from '@/components/top-ranking';
@@ -18,9 +19,9 @@ export default memo(function RankingList() {
   );
 
   useEffect(() => {
-    dispatch(getTopListAction(0));
-    dispatch(getTopListAction(2));
-    dispatch(getTopListAction(3));
+    dispatch(getTopListAction(rankingID.UPRANKINGLISTID));
+    dispatch(getTopListAction(rankingID.NEWSONGLISTID));
+    dispatch(getTopListAction(rankingID.ORIGINLISTID));
   }, [dispatch]);
 
   return (
