@@ -18,8 +18,9 @@ function Recommend(props) {
 
         <RecommendRight>
           <UserLogin />
-          <HotAnchor />
+
           <InSinger />
+          <HotAnchor />
         </RecommendRight>
       </Content>
     </RecommendWrapper>
