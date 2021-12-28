@@ -1,0 +1,134 @@
+import React, { memo, useEffect, useState, useRef, useCallback } from 'react';
+import { useDispatch, useSelector, shallowEqual } from 'react-redux';
+import { changePlayerSongAction } from '../store/actionCreators';
+
+import { Slider } from 'antd';
+
+import { getSizeImage, formatMinuteSecond, getPlayUrl } from '@/utils/format-utils';
+
+import { PlaybarWrapper, Control, PlayInfo, Operator } from './style';
+
+export default memo(function AppPlayBar() {
+  const audioRef = useRef();
+  const [isPlaying, setIsPlaying] = useState(false);
+  const [duration, setDuration] = useState(0); // 歌曲时长
+  const [currentTime, setCurrentTime] = useState(0);
+  const [progress, setProgress] = useState(0); // 控制歌曲进度条
+  const [isChanging, setIsChanging] = useState(false);
+
+  // redux hooks
+  const dispatch = useDispatch();
+  const { currentSong } = useSelector(
+    (state) => ({
+      currentSong: state.getIn(['player', 'currentSong']),
+    }),
+    shallowEqual,
+  );
+
+  useEffect(() => {
+    dispatch(changePlayerSongAction(167876));
+  }, [dispatch]);
+
+  useEffect(() => {
+    audioRef.current.src = getPlayUrl(currentSong.id);
+    setDuration(currentSong.dt);
+  }, [currentSong]);
+
+  // 播放暂停
+  const play = useCallback(() => {
+    setIsPlaying(!isPlaying);
+    isPlaying
+      ? audioRef.current.pause()
+      : audioRef.current.play().catch((err) => {
+          setIsPlaying(false);
+        });
+  }, [isPlaying]);
+
+  // 播放时间更新
+  const timeUpdate = (e) => {
+    // 获取到的是秒，要转成毫秒
+    const currentTime = e.target.currentTime;
+    if (!isChanging) {
+      setCurrentTime(currentTime * 1000);
+      setProgress(((currentTime * 1000) / duration) * 100);
+    }
+  };
+
+  // 滑块被滑动时触发
+  const sliderChange = useCallback(
+    (value) => {
+      setIsChanging(true);
+      const time = (value / 100.0) * duration;
+      setCurrentTime(time);
+      setProgress(value);
+    },
+    [duration],
+  );
+
+  // 滑块被点击触发
+  const sliderAfterChange = useCallback(
+    (value) => {
+      setIsChanging(true);
+      const currentTime = (value / 100) * duration;
+      const time = currentTime / 1000;
+      audioRef.current.currentTime = time;
+      setCurrentTime(currentTime);
+      setIsChanging(false);
+
+      if (!isPlaying) {
+        play();
+      }
+    },
+    [duration, isPlaying, play],
+  );
+
+  return (
+    <PlaybarWrapper className="sprite_playbar">
+      <div className="content wrap-v2">
+        <Control isPlaying={isPlaying}>
+          <button className="sprite_playbar prev" />
+          <button className="sprite_playbar play" onClick={(e) => play()} />
+          <button className="sprite_playbar next" />
+        </Control>
+
+        <PlayInfo>
+          <div className="image">
+            <a href="todo">
+              <img src={getSizeImage(currentSong?.al?.picUrl, 35)} alt={currentSong?.name || ''} />
+            </a>
+          </div>
+
+          <div className="info">
+            <div className="song">
+              <span className="song-name">{currentSong?.name || ''}</span>
+              <span className="singer-name">{(currentSong?.ar && currentSong.ar[0]?.name) || ''}</span>
+            </div>
+
+            <div className="progress">
+              <Slider value={progress} onChange={sliderChange} onAfterChange={sliderAfterChange} tipFormatter={null} />
+              <div className="time">
+                <span className="now-time">{formatMinuteSecond(currentTime)}</span>
+                <span className="divider">/</span>
+                <span className="total-time">{formatMinuteSecond(duration)}</span>
+              </div>
+            </div>
+          </div>
+        </PlayInfo>
+
+        <Operator>
+          <div className="left">
+            <button className="sprite_playbar btn favor" />
+            <button className="sprite_playbar btn share" />
+          </div>
+          <div className="right sprite_playbar">
+            <button className="sprite_playbar btn volume" />
+            <button className="sprite_playbar btn loop" />
+            <button className="sprite_playbar btn playlist">12</button>
+          </div>
+        </Operator>
+      </div>
+
+      <audio ref={audioRef} onTimeUpdate={timeUpdate} />
+    </PlaybarWrapper>
+  );
+});

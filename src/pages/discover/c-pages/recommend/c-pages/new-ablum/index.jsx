@@ -33,7 +33,7 @@ export default memo(function NewAblum() {
               {[0, 1].map((i) => (
                 <div key={i} className="page">
                   {/* 将长度为10的数字，分为两部分 */}
-                  {newAlbums.slice(i * 5, (i + 1) * 5).map((item) => {
+                  {newAlbums?.slice(i * 5, (i + 1) * 5).map((item) => {
                     return <AlbumCover key={item.id} info={item} />;
                   })}
                 </div>

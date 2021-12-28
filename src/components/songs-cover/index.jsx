@@ -6,7 +6,7 @@ import { ThemeCoverWrapper } from './style';
 
 export default memo(function SongsCover(props) {
   const { info, right, isRecommend = false } = props;
-  console.log(info);
+
   return (
     <ThemeCoverWrapper right={right}>
       <div className="cover-top">

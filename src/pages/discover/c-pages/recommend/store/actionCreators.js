@@ -1,7 +1,7 @@
 import * as actionTypes from './constants';
 import * as rankingID from '@/common/constants';
 
-import { getTopBanner, getHotRecommend, getNewAlbum, getTopList, getArtistList } from '@/services/recommend';
+import { recommendAPI } from '@/services';
 
 const changeBannerAction = (res) => ({
   type: actionTypes.CHANGE_TOP_BANNER,
@@ -40,7 +40,7 @@ const changeArtistListAction = (res) => ({
 
 export const getBannerAction = () => {
   return (dispatch) => {
-    getTopBanner().then((res) => {
+    recommendAPI.getTopBanner().then((res) => {
       dispatch(changeBannerAction(res));
     });
   };
@@ -48,7 +48,7 @@ export const getBannerAction = () => {
 
 export const getHotRecommedAction = (limit = 8) => {
   return (dispatch) => {
-    getHotRecommend(limit).then((res) => {
+    recommendAPI.getHotRecommend(limit).then((res) => {
       dispatch(changeHotRecommedAction(res));
     });
   };
@@ -56,7 +56,7 @@ export const getHotRecommedAction = (limit = 8) => {
 
 export const getNewAlbumAction = (limit = 10, offset = 0) => {
   return (dispatch) => {
-    getNewAlbum(limit, offset).then((res) => {
+    recommendAPI.getNewAlbum(limit, offset).then((res) => {
       dispatch(changeNewAlbumAction(res));
     });
   };
@@ -64,7 +64,7 @@ export const getNewAlbumAction = (limit = 10, offset = 0) => {
 
 export const getTopListAction = (id) => {
   return (dispatch) => {
-    getTopList(id).then((res) => {
+    recommendAPI.getTopList(id).then((res) => {
       switch (id) {
         case rankingID.NEWSONGLISTID:
           dispatch(changeNewSongListAction(res));
@@ -83,7 +83,7 @@ export const getTopListAction = (id) => {
 
 export const getArtistListAction = (limit, type, area, initial) => {
   return (dispatch) => {
-    getArtistList(limit, type, area, initial).then((res) => {
+    recommendAPI.getArtistList(limit, type, area, initial).then((res) => {
       dispatch(changeArtistListAction(res));
     });
   };
