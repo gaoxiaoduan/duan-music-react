@@ -7,6 +7,7 @@ const Songs = React.lazy((_) => import('@/pages/discover/c-pages/songs'));
 const Djradio = React.lazy((_) => import('@/pages/discover/c-pages/djradio'));
 const Artist = React.lazy((_) => import('@/pages/discover/c-pages/artist'));
 const Album = React.lazy((_) => import('@/pages/discover/c-pages/album'));
+const AppPlayer = React.lazy((_) => import('@/pages/player'));
 
 const Mine = React.lazy((_) => import('@/pages/mine'));
 const Focus = React.lazy((_) => import('@/pages/focus'));
@@ -47,6 +48,10 @@ const routes = [
       {
         path: '/discover/album',
         component: Album,
+      },
+      {
+        path: '/discover/appPlayer',
+        component: AppPlayer,
       },
     ],
   },

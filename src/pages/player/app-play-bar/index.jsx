@@ -1,6 +1,8 @@
+/* eslint-disable react/jsx-curly-brace-presence */
 import React, { memo, useEffect, useState, useRef, useCallback } from 'react';
+import { NavLink } from 'react-router-dom';
 import { useDispatch, useSelector, shallowEqual } from 'react-redux';
-import { changePlayerSongAction } from '../store/actionCreators';
+import { changePlayerSongAction, changePlayerSequence, changeMusicAction } from '../store/actionCreators';
 
 import { Slider } from 'antd';
 
@@ -18,9 +20,11 @@ export default memo(function AppPlayBar() {
 
   // redux hooks
   const dispatch = useDispatch();
-  const { currentSong } = useSelector(
+  const { currentSong, playSequence, playerList } = useSelector(
     (state) => ({
       currentSong: state.getIn(['player', 'currentSong']),
+      playSequence: state.getIn(['player', 'playSequence']),
+      playerList: state.getIn(['player', 'playerList']),
     }),
     shallowEqual,
   );
@@ -30,9 +34,23 @@ export default memo(function AppPlayBar() {
   }, [dispatch]);
 
   useEffect(() => {
-    audioRef.current.src = getPlayUrl(currentSong.id);
-    setDuration(currentSong.dt);
+    if (Object.keys(currentSong).length !== 0) {
+      audioRef.current.src = getPlayUrl(currentSong.id);
+      setDuration(currentSong.dt);
+      audioRef.current
+        .play()
+        .then((res) => {
+          setIsPlaying(true);
+        })
+        .catch((err) => {
+          setIsPlaying(false);
+        });
+    }
   }, [currentSong]);
+
+  const changePlaySequence = () => {
+    dispatch(changePlayerSequence(playSequence + 1));
+  };
 
   // 播放暂停
   const play = useCallback(() => {
@@ -74,28 +92,47 @@ export default memo(function AppPlayBar() {
       audioRef.current.currentTime = time;
       setCurrentTime(currentTime);
       setIsChanging(false);
-
-      if (!isPlaying) {
-        play();
-      }
     },
-    [duration, isPlaying, play],
+    [duration, isPlaying],
   );
+
+  // 歌曲结束
+  const handleMusicEnd = useCallback(() => {
+    if (playSequence === 2) {
+      // 单曲循环
+      audioRef.current.currentTime = 0;
+      audioRef.current
+        .play()
+        .then((res) => {
+          setIsPlaying(true);
+        })
+        .catch((err) => {
+          setIsPlaying(false);
+        });
+    } else {
+      dispatch(changeMusicAction(1));
+    }
+  }, []);
 
   return (
     <PlaybarWrapper className="sprite_playbar">
       <div className="content wrap-v2">
+        {/* 控制相关 */}
         <Control isPlaying={isPlaying}>
-          <button className="sprite_playbar prev" />
+          <button className="sprite_playbar prev" onClick={(e) => dispatch(changeMusicAction(-1))} />
           <button className="sprite_playbar play" onClick={(e) => play()} />
-          <button className="sprite_playbar next" />
+          <button className="sprite_playbar next" onClick={(e) => dispatch(changeMusicAction(1))} />
         </Control>
 
         <PlayInfo>
           <div className="image">
-            <a href="todo">
-              <img src={getSizeImage(currentSong?.al?.picUrl, 35)} alt={currentSong?.name || ''} />
-            </a>
+            {playerList.length !== 0 ? (
+              <NavLink to="/discover/appPlayer">
+                <img src={getSizeImage(currentSong?.al?.picUrl, 35)} alt={currentSong?.name || ''} />
+              </NavLink>
+            ) : (
+              <img src="http://s4.music.126.net/style/web2/img/default/default_album.jpg" />
+            )}
           </div>
 
           <div className="info">
@@ -115,20 +152,20 @@ export default memo(function AppPlayBar() {
           </div>
         </PlayInfo>
 
-        <Operator>
+        <Operator sequence={playSequence}>
           <div className="left">
             <button className="sprite_playbar btn favor" />
             <button className="sprite_playbar btn share" />
           </div>
           <div className="right sprite_playbar">
             <button className="sprite_playbar btn volume" />
-            <button className="sprite_playbar btn loop" />
-            <button className="sprite_playbar btn playlist">12</button>
+            <button className="sprite_playbar btn loop" onClick={(e) => changePlaySequence()} />
+            <button className="sprite_playbar btn playlist">{playerList.length || 0}</button>
           </div>
         </Operator>
       </div>
 
-      <audio ref={audioRef} onTimeUpdate={timeUpdate} />
+      <audio ref={audioRef} onTimeUpdate={(e) => timeUpdate(e)} onEnded={(e) => handleMusicEnd()} />
     </PlaybarWrapper>
   );
 });

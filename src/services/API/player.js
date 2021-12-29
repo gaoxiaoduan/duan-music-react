@@ -10,6 +10,15 @@ const playerAPI = {
       },
     });
   },
+  // 获取歌词信息
+  getLyric(id) {
+    return request({
+      url: '/lyric',
+      params: {
+        id,
+      },
+    });
+  },
 };
 
 export default playerAPI;

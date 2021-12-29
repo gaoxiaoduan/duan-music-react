@@ -57,8 +57,13 @@ export const PlayInfo = styled.div`
 
   .image {
     width: 34px;
-    height: 34px;
+    height: 35px;
     border-radius: 5px;
+    img {
+      width: 34px;
+      height: 35px;
+      cursor: pointer;
+    }
   }
 
   .info {
@@ -102,6 +107,9 @@ export const PlayInfo = styled.div`
           border: none;
           margin-top: -7px;
           background: url(${require('@/assets/img/sprite_icon.png')}) 0 -250px;
+          &:focus {
+            box-shadow: none;
+          }
         }
       }
 
