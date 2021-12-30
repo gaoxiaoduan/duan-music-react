@@ -229,6 +229,8 @@ const defaultState = Map({
   playerSongIndex: -1,
   currentSong: {},
   playSequence: 0, // 0 顺序播放 1 随机播放 2 单曲循环
+  currentLyrics: [], // 当前播放的歌词信息
+  currentLyricIndex: 0,
 });
 
 function reducer(state = defaultState, action) {
@@ -241,6 +243,10 @@ function reducer(state = defaultState, action) {
       return state.set('playerSongIndex', action.playerSongIndex);
     case actionTypes.CHANGE_PLAYER_SEQUENCE:
       return state.set('playSequence', action.playSequence);
+    case actionTypes.CHANGE_CURRENT_LYRICS:
+      return state.set('currentLyrics', action.currentLyrics);
+    case actionTypes.CHANGE_CURRENT_LYRIC_INDEX:
+      return state.set('currentLyricIndex', action.currentLyricIndex);
     default:
       return state;
   }

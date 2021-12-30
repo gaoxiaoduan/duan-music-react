@@ -24,6 +24,16 @@ const changePlayerSequenceAction = (playSequence) => ({
   playSequence,
 });
 
+const changeCurrentLyricsAction = (currentLyrics) => ({
+  type: actionTypes.CHANGE_CURRENT_LYRICS,
+  currentLyrics,
+});
+
+export const changeCurrentLyricIndexAction = (currentLyricIndex) => ({
+  type: actionTypes.CHANGE_CURRENT_LYRIC_INDEX,
+  currentLyricIndex,
+});
+
 export const changePlayerSongAction = (ids) => {
   return (dispatch, getState) => {
     // 1.判断歌曲是否已经存在播放列表中
@@ -97,7 +107,7 @@ export const getLyricAction = (id) => {
     playerAPI.getLyric(id).then((res) => {
       const lrcString = res.lrc.lyric;
       const lyrics = parseLyric(lrcString);
-      console.log(lyrics);
+      dispatch(changeCurrentLyricsAction(lyrics));
     });
   };
 };

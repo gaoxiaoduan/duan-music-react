@@ -2,10 +2,15 @@
 import React, { memo, useEffect, useState, useRef, useCallback } from 'react';
 import { NavLink } from 'react-router-dom';
 import { useDispatch, useSelector, shallowEqual } from 'react-redux';
-import { changePlayerSongAction, changePlayerSequence, changeMusicAction } from '../store/actionCreators';
+import {
+  changePlayerSongAction,
+  changePlayerSequence,
+  changeMusicAction,
+  changeCurrentLyricIndexAction,
+} from '../store/actionCreators';
 
 import { Slider } from 'antd';
-
+import AppPlayPanel from '../app-play-panel';
 import { getSizeImage, formatMinuteSecond, getPlayUrl } from '@/utils/format-utils';
 
 import { PlaybarWrapper, Control, PlayInfo, Operator } from './style';
@@ -17,14 +22,17 @@ export default memo(function AppPlayBar() {
   const [currentTime, setCurrentTime] = useState(0);
   const [progress, setProgress] = useState(0); // 控制歌曲进度条
   const [isChanging, setIsChanging] = useState(false);
+  const [showPanel, setShowPanel] = useState(true);
 
   // redux hooks
   const dispatch = useDispatch();
-  const { currentSong, playSequence, playerList } = useSelector(
+  const { currentSong, playSequence, playerList, currentLyrics, currentLyricIndex } = useSelector(
     (state) => ({
       currentSong: state.getIn(['player', 'currentSong']),
       playSequence: state.getIn(['player', 'playSequence']),
       playerList: state.getIn(['player', 'playerList']),
+      currentLyrics: state.getIn(['player', 'currentLyrics']),
+      currentLyricIndex: state.getIn(['player', 'currentLyricIndex']),
     }),
     shallowEqual,
   );
@@ -69,6 +77,23 @@ export default memo(function AppPlayBar() {
     if (!isChanging) {
       setCurrentTime(currentTime * 1000);
       setProgress(((currentTime * 1000) / duration) * 100);
+    }
+
+    let lyricIndex = 0;
+    for (let i = 0; i < currentLyrics.length; i++) {
+      if (currentLyrics[i].time > currentTime * 1000) {
+        lyricIndex = i;
+        break;
+      }
+    }
+    if (currentLyricIndex !== lyricIndex - 1) {
+      dispatch(changeCurrentLyricIndexAction(lyricIndex - 1));
+      // message.open({
+      //   content: currentLyrics[lyricIndex - 1].content,
+      //   key: 'lyric',
+      //   duration: 0,
+      //   className: 'lyric-message',
+      // });
     }
   };
 
@@ -137,8 +162,13 @@ export default memo(function AppPlayBar() {
 
           <div className="info">
             <div className="song">
-              <span className="song-name">{currentSong?.name || ''}</span>
-              <span className="singer-name">{(currentSong?.ar && currentSong.ar[0]?.name) || ''}</span>
+              <NavLink to="/discover/appPlayer" className="song-name">
+                {currentSong?.name || ''}
+              </NavLink>
+              <a href="todo" className="singer-name">
+                {(currentSong?.ar && currentSong.ar[0]?.name) || ''}
+              </a>
+              <a href="todo" className="sprite_playbar src" />
             </div>
 
             <div className="progress">
@@ -160,12 +190,15 @@ export default memo(function AppPlayBar() {
           <div className="right sprite_playbar">
             <button className="sprite_playbar btn volume" />
             <button className="sprite_playbar btn loop" onClick={(e) => changePlaySequence()} />
-            <button className="sprite_playbar btn playlist">{playerList.length || 0}</button>
+            <button className="sprite_playbar btn playlist" onClick={(e) => setShowPanel(!showPanel)}>
+              {playerList.length || 0}
+            </button>
           </div>
         </Operator>
       </div>
 
       <audio ref={audioRef} onTimeUpdate={(e) => timeUpdate(e)} onEnded={(e) => handleMusicEnd()} />
+      {showPanel && <AppPlayPanel />}
     </PlaybarWrapper>
   );
 });

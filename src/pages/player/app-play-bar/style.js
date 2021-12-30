@@ -35,6 +35,9 @@ export const Control = styled.div`
 
   .prev {
     background-position: 0 -130px;
+    &:hover {
+      background-position: -30px -130px;
+    }
   }
 
   .play {
@@ -43,10 +46,16 @@ export const Control = styled.div`
     margin: 0 8px;
     background-position: 0 ${(props) => (props.isPlaying ? '-165px' : '-204px')};
     cursor: pointer;
+    &:hover {
+      background-position: -40px ${(props) => (props.isPlaying ? '-165px' : '-204px')};
+    }
   }
 
   .next {
     background-position: -80px -130px;
+    &:hover {
+      background-position: -110px -130px;
+    }
   }
 `;
 
@@ -79,7 +88,18 @@ export const PlayInfo = styled.div`
 
       .singer-name {
         color: #a1a1a1;
-        margin-left: 10px;
+        margin-left: 15px;
+      }
+
+      .src {
+        display: inline-block;
+        width: 14px;
+        height: 15px;
+        margin: 0 0 -3px 14px;
+        background-position: -110px -103px;
+        &:hover {
+          background-position: -130px -103px;
+        }
       }
     }
 
@@ -89,8 +109,7 @@ export const PlayInfo = styled.div`
 
       .ant-slider {
         width: 493px;
-        margin-right: 10px;
-
+        margin: 9px 10px 12px 10px;
         .ant-slider-rail {
           height: 9px;
           background: url(${require('@/assets/img/progress_bar.png')}) right 0;
@@ -138,10 +157,16 @@ export const Operator = styled.div`
 
   .favor {
     background-position: -88px -163px;
+    :hover {
+      background-position: -88px -189px;
+    }
   }
 
   .share {
     background-position: -114px -163px;
+    &:hover {
+      background-position: -114px -189px;
+    }
   }
 
   .right {
@@ -153,6 +178,9 @@ export const Operator = styled.div`
 
     .volume {
       background-position: -2px -248px;
+      &:hover {
+        background-position: -31px -248px;
+      }
     }
 
     .loop {
@@ -166,14 +194,29 @@ export const Operator = styled.div`
             return '-3px -344px';
         }
       }};
+      &:hover {
+        background-position: ${(props) => {
+          switch (props.sequence) {
+            case 1:
+              return '-93px -248px';
+            case 2:
+              return '-93px -344px';
+            default:
+              return '-33px -344px';
+          }
+        }};
+      }
     }
 
     .playlist {
       padding-left: 18px;
-      text-align: center;
-      color: #ccc;
+      color: #666;
       width: 59px;
       background-position: -42px -68px;
+      line-height: 25px;
+      &:hover {
+        background-position: -42px -98px;
+      }
     }
   }
 `;
