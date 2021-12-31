@@ -142,14 +142,18 @@ export default memo(function AppPlayBar() {
     setShowPanel(!showPanel);
   }, [showPanel]);
 
+  const changeMusic = (tag) => {
+    if (playerList.length === 0) return;
+    dispatch(changeMusicAction(tag));
+  };
   return (
     <PlaybarWrapper className="sprite_playbar">
       <div className="content wrap-v2">
         {/* 控制相关 */}
         <Control isPlaying={isPlaying}>
-          <button className="sprite_playbar prev" onClick={(e) => dispatch(changeMusicAction(-1))} />
+          <button className="sprite_playbar prev" onClick={(e) => changeMusic(-1)} />
           <button className="sprite_playbar play" onClick={(e) => play()} />
-          <button className="sprite_playbar next" onClick={(e) => dispatch(changeMusicAction(1))} />
+          <button className="sprite_playbar next" onClick={(e) => changeMusic(1)} />
         </Control>
 
         <PlayInfo>
