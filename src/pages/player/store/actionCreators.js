@@ -111,3 +111,35 @@ export const getLyricAction = (id) => {
     });
   };
 };
+
+export const delPlayerListAction = (delSongId) => {
+  return (dispatch, getState) => {
+    const playerList = getState().getIn(['player', 'playerList']);
+    let playerSongIndex = getState().getIn(['player', 'playerSongIndex']);
+    const delSongIndex = playerList.findIndex((item) => item.id === delSongId);
+    const delSong = playerList[delSongIndex];
+    const newPlayerList = playerList.filter((item) => item.id !== delSong.id);
+
+    // 1.要删除的歌是正在播放的歌曲
+    if (delSongIndex === playerSongIndex) {
+      // 1.1 播放的刚好是最后一首歌，就播放上一首
+      if (playerSongIndex === playerList.length - 1) {
+        dispatch(changePlayerListAction(newPlayerList));
+        if (newPlayerList.length === 0) return;
+        dispatch(changePlayerSongIndexAction(playerSongIndex - 1));
+        dispatch(changeCurrentSongAction(playerList[playerSongIndex - 1]));
+        dispatch(getLyricAction(playerList[playerSongIndex - 1].id));
+      } else {
+        // 1.2 不是最后一首，删除后播放下一首
+        dispatch(changePlayerListAction(newPlayerList));
+        if (newPlayerList.length === 0) return;
+        dispatch(changeCurrentSongAction(playerList[playerSongIndex + 1]));
+        dispatch(getLyricAction(playerList[playerSongIndex + 1].id));
+      }
+    } else {
+      // 2.不是正在播放的歌,直接删除
+      dispatch(changePlayerListAction(newPlayerList));
+      dispatch(changePlayerSongIndexAction(playerSongIndex - 1));
+    }
+  };
+};

@@ -22,7 +22,7 @@ export default memo(function AppPlayBar() {
   const [currentTime, setCurrentTime] = useState(0);
   const [progress, setProgress] = useState(0); // 控制歌曲进度条
   const [isChanging, setIsChanging] = useState(false);
-  const [showPanel, setShowPanel] = useState(true);
+  const [showPanel, setShowPanel] = useState(false);
 
   // redux hooks
   const dispatch = useDispatch();
@@ -79,21 +79,20 @@ export default memo(function AppPlayBar() {
       setProgress(((currentTime * 1000) / duration) * 100);
     }
 
-    let lyricIndex = 0;
+    let lyricIndex = -1;
     for (let i = 0; i < currentLyrics.length; i++) {
       if (currentLyrics[i].time > currentTime * 1000) {
         lyricIndex = i;
         break;
       }
     }
-    if (currentLyricIndex !== lyricIndex - 1) {
+
+    if (lyricIndex !== -1 && currentLyricIndex !== lyricIndex - 1) {
       dispatch(changeCurrentLyricIndexAction(lyricIndex - 1));
-      // message.open({
-      //   content: currentLyrics[lyricIndex - 1].content,
-      //   key: 'lyric',
-      //   duration: 0,
-      //   className: 'lyric-message',
-      // });
+    }
+    // fix:修复最后一行歌词没有高亮的问题
+    if (lyricIndex === -1 && currentLyricIndex + 1 === currentLyrics.length - 1) {
+      dispatch(changeCurrentLyricIndexAction(currentLyricIndex + 1));
     }
   };
 
@@ -139,6 +138,10 @@ export default memo(function AppPlayBar() {
     }
   }, []);
 
+  const handleColse = useCallback(() => {
+    setShowPanel(!showPanel);
+  }, [showPanel]);
+
   return (
     <PlaybarWrapper className="sprite_playbar">
       <div className="content wrap-v2">
@@ -151,7 +154,7 @@ export default memo(function AppPlayBar() {
 
         <PlayInfo>
           <div className="image">
-            {playerList.length !== 0 ? (
+            {playerList.length !== 0 || audioRef?.current?.src ? (
               <NavLink to="/discover/appPlayer">
                 <img src={getSizeImage(currentSong?.al?.picUrl, 35)} alt={currentSong?.name || ''} />
               </NavLink>
@@ -198,7 +201,7 @@ export default memo(function AppPlayBar() {
       </div>
 
       <audio ref={audioRef} onTimeUpdate={(e) => timeUpdate(e)} onEnded={(e) => handleMusicEnd()} />
-      {showPanel && <AppPlayPanel />}
+      {showPanel && <AppPlayPanel handleColse={handleColse} />}
     </PlaybarWrapper>
   );
 });

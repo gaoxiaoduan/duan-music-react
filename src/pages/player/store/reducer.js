@@ -226,7 +226,7 @@ const defaultState = Map({
       publishTime: 1640620800000,
     },
   ],
-  playerSongIndex: -1,
+  playerSongIndex: 0,
   currentSong: {},
   playSequence: 0, // 0 顺序播放 1 随机播放 2 单曲循环
   currentLyrics: [], // 当前播放的歌词信息

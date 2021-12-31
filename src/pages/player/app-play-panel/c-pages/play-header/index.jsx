@@ -3,7 +3,8 @@ import { useSelector, shallowEqual } from 'react-redux';
 
 import { HeaderWrapper, HeaderLeft, HeaderRight } from './style';
 
-export default memo(function PlayHeader() {
+export default memo(function PlayHeader(props) {
+  const { handleColse } = props;
   const { playerList, currentSong } = useSelector(
     (state) => ({
       playerList: state.getIn(['player', 'playerList']),
@@ -31,7 +32,9 @@ export default memo(function PlayHeader() {
       <HeaderRight>
         <div className="empty" />
         <h3 className="title">{currentSong.name}</h3>
-        <span className="sprite_playlist closeButton">关闭</span>
+        <span className="sprite_playlist closeButton" onClick={(e) => handleColse()}>
+          关闭
+        </span>
       </HeaderRight>
     </HeaderWrapper>
   );
