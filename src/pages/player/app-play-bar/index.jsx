@@ -37,9 +37,9 @@ export default memo(function AppPlayBar() {
     shallowEqual,
   );
 
-  useEffect(() => {
-    dispatch(changePlayerSongAction(167876));
-  }, [dispatch]);
+  // useEffect(() => {
+  //   dispatch(changePlayerSongAction(167876));
+  // }, [dispatch]);
 
   useEffect(() => {
     if (Object.keys(currentSong).length !== 0) {
@@ -171,7 +171,7 @@ export default memo(function AppPlayBar() {
               <a href="todo" className="singer-name">
                 {(currentSong?.ar && currentSong.ar[0]?.name) || ''}
               </a>
-              <a href="todo" className="sprite_playbar src" />
+              {(playerList.length !== 0 || audioRef?.current?.src) && <a href="todo" className="sprite_playbar src" />}
             </div>
 
             <div className="progress">
