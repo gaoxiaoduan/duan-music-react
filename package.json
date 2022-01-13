@@ -2,6 +2,17 @@
   "name": "duan-music-react",
   "version": "0.1.0",
   "private": true,
+  "scripts": {
+    "start": "craco start",
+    "build": "craco build",
+    "test": "craco test",
+    "eject": "react-scripts eject",
+    "commit": "cz",
+    "prettier": "prettier --write .",
+    "eslint": "eslint src --ext .js,jsx --fix",
+    "commitlint": "npm run eslint && npm run prettier",
+    "prepare": "husky install"
+  },
   "dependencies": {
     "@craco/craco": "^6.4.3",
     "@testing-library/jest-dom": "^5.16.1",
@@ -23,29 +34,6 @@
     "styled-components": "^5.3.3",
     "web-vitals": "^2.1.2"
   },
-  "scripts": {
-    "start": "craco start",
-    "build": "craco build",
-    "test": "craco test",
-    "eject": "react-scripts eject",
-    "prettier": "prettier --write .",
-    "eslint": "eslint src --ext .js,jsx --fix",
-    "commitlint": "npm run eslint && npm run prettier",
-    "prepare": "husky install",
-    "commit": "cz"
-  },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
-  },
   "devDependencies": {
     "@commitlint/cli": "^15.0.0",
     "@commitlint/config-conventional": "^15.0.0",
@@ -61,5 +49,17 @@
     "commitizen": {
       "path": "./node_modules/cz-conventional-changelog"
     }
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
   }
 }
