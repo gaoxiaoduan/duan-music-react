@@ -5,10 +5,10 @@ import { getSizeImage, getCount } from '@/utils/format-utils';
 import { ThemeCoverWrapper } from './style';
 
 export default memo(function SongsCover(props) {
-  const { info, right, isRecommend = false } = props;
+  const { info, isRecommend = false } = props;
 
   return (
-    <ThemeCoverWrapper right={right}>
+    <ThemeCoverWrapper>
       <div className="cover-top">
         <img src={getSizeImage(info?.picUrl || info?.coverImgUrl, 140)} alt={info?.name || '图片介绍'} />
         <div className="cover sprite_covor">
