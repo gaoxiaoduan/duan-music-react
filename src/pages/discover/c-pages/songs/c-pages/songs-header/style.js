@@ -3,6 +3,7 @@ import styled from 'styled-components';
 export const SongsHeaderWrapper = styled.div`
   display: flex;
   justify-content: space-between;
+  position: relative;
   height: 42px;
   border-bottom: 2px solid #c20c0c;
   line-height: 33px;

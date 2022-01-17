@@ -10,7 +10,7 @@ const defaultState = Map({
 export default (state = defaultState, action) => {
   switch (action.type) {
     case actionTypes.CHANGE_CATEGORY:
-      return 1;
+      return state.set('category', action.category);
     case actionTypes.CHANGE_CURRENT_CATEGORY:
       return 2;
     case actionTypes.CHANGE_SONG_CATEGORY_LIST:
