@@ -5,5 +5,10 @@ export const RecommendWrapper = styled.div`
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
+    margin-top: 20px;
+
+    & > li {
+      margin-bottom: 30px;
+    }
   }
 `;
