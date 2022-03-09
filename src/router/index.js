@@ -15,7 +15,6 @@ const AppSongList = React.lazy((_) => import('@/pages/song-list')); // 歌曲列
 const Mine = React.lazy((_) => import('@/pages/mine')); // 我的音乐
 const Focus = React.lazy((_) => import('@/pages/focus')); // 关注
 
-
 const routes = [
   { path: '/', exact: true, render: () => <Redirect to="/discover" /> },
   {
