@@ -6,6 +6,7 @@ export const SongsListWrapper = styled.div`
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
+    min-height: 1512px;
 
     & > li {
       margin: 0 50px 30px 0;
