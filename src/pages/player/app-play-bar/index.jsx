@@ -9,7 +9,7 @@ import {
   changeCurrentLyricIndexAction,
 } from '../store/actionCreators';
 
-import { Slider } from 'antd';
+import { Slider, message } from 'antd';
 import AppPlayPanel from '../app-play-panel';
 import { getSizeImage, formatMinuteSecond, getPlayUrl } from '@/utils/format-utils';
 
@@ -57,11 +57,19 @@ export default memo(function AppPlayBar() {
   }, [currentSong]);
 
   const changePlaySequence = () => {
+    // playSequence:0 顺序播放 1 随机播放 2 单曲循环
+
     dispatch(changePlayerSequence(playSequence + 1));
+    // console.log(playSequence);
   };
 
   // 播放暂停
   const play = useCallback(() => {
+    if (!playerList.length) {
+      message.info('当前播放列表为空，请先添加歌曲🎵');
+      return;
+    }
+
     setIsPlaying(!isPlaying);
     isPlaying
       ? audioRef.current.pause()
@@ -136,7 +144,7 @@ export default memo(function AppPlayBar() {
     } else {
       dispatch(changeMusicAction(1));
     }
-  }, []);
+  }, [playSequence]);
 
   const handleColse = useCallback(() => {
     setShowPanel(!showPanel);
@@ -146,6 +154,7 @@ export default memo(function AppPlayBar() {
     if (playerList.length === 0) return;
     dispatch(changeMusicAction(tag));
   };
+
   return (
     <PlaybarWrapper className="sprite_playbar">
       <div className="content wrap-v2">
@@ -156,6 +165,7 @@ export default memo(function AppPlayBar() {
           <button className="sprite_playbar next" onClick={(e) => changeMusic(1)} />
         </Control>
 
+        {/* 当前播放详情 */}
         <PlayInfo>
           <div className="image">
             {playerList.length !== 0 || audioRef?.current?.src ? (
@@ -167,14 +177,17 @@ export default memo(function AppPlayBar() {
             )}
           </div>
 
+          {/* 歌曲详情 */}
           <div className="info">
             <div className="song">
               <NavLink to="/discover/appPlayer" className="song-name">
                 {currentSong?.name || ''}
               </NavLink>
+
               <a href="todo" className="singer-name">
                 {(currentSong?.ar && currentSong.ar[0]?.name) || ''}
               </a>
+
               {(playerList.length !== 0 || audioRef?.current?.src) && <a href="todo" className="sprite_playbar src" />}
             </div>
 
@@ -189,14 +202,20 @@ export default memo(function AppPlayBar() {
           </div>
         </PlayInfo>
 
+        {/* 操作相关 */}
         <Operator sequence={playSequence}>
           <div className="left">
             <button className="sprite_playbar btn favor" />
             <button className="sprite_playbar btn share" />
           </div>
           <div className="right sprite_playbar">
+            {/* 音量 */}
             <button className="sprite_playbar btn volume" />
+
+            {/* 歌曲循环 */}
             <button className="sprite_playbar btn loop" onClick={(e) => changePlaySequence()} />
+
+            {/* 歌曲列表卡片 */}
             <button className="sprite_playbar btn playlist" onClick={(e) => setShowPanel(!showPanel)}>
               {playerList.length || 0}
             </button>

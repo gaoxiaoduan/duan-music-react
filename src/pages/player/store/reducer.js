@@ -2,12 +2,12 @@ import { Map } from 'immutable';
 import * as actionTypes from './constans';
 
 const defaultState = Map({
-  playerList: [],
-  playerSongIndex: 0,
-  currentSong: {},
+  playerList: [], // 播放列表
+  playerSongIndex: 0, // 当前播放歌曲索引
+  currentSong: {}, // 当前播放歌曲详情
   playSequence: 0, // 0 顺序播放 1 随机播放 2 单曲循环
   currentLyrics: [], // 当前播放的歌词信息
-  currentLyricIndex: 0,
+  currentLyricIndex: 0, // 当前播放歌词索引
 });
 
 function reducer(state = defaultState, action) {
