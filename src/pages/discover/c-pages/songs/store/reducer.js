@@ -4,7 +4,7 @@ import * as actionTypes from './constants';
 const defaultState = Map({
   category: [], // 类别数据
   currentCategory: '全部', // 当前选中类别
-  songCategoryList: [], // 对应的类别列表
+  songCategoryInfo: {}, // 对应的类别所有信息，包含列表
 });
 
 export default (state = defaultState, action) => {
@@ -13,8 +13,8 @@ export default (state = defaultState, action) => {
       return state.set('category', action.category);
     case actionTypes.CHANGE_CURRENT_CATEGORY:
       return 2;
-    case actionTypes.CHANGE_SONG_CATEGORY_LIST:
-      return state.set('songCategoryList', action.songCategoryList);
+    case actionTypes.CHANGE_SONG_CATEGORY_INFO:
+      return state.set('songCategoryInfo', action.songCategoryInfo);
     default:
       return state;
   }

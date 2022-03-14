@@ -4,9 +4,9 @@ import { SONG_LIST_LIMIT } from './constants';
 import { songsAPI } from '@/services';
 import { handleSongsCategory } from '@/utils/handle-data';
 
-const changeSongListAction = (res) => ({
-  type: actionTypes.CHANGE_SONG_CATEGORY_LIST,
-  songCategoryList: res?.playlists,
+const changeSongInfoAction = (res) => ({
+  type: actionTypes.CHANGE_SONG_CATEGORY_INFO,
+  songCategoryInfo: res,
 });
 
 const changeSongCategoryAction = (category) => ({
@@ -15,10 +15,12 @@ const changeSongCategoryAction = (category) => ({
 });
 
 // 获取分类歌单列表
-export const getSongListAction = (page = 1) => {
+export const getSongListAction = (params) => {
   return (dispatch, getState) => {
-    songsAPI.getSongCategoryList().then((res) => {
-      dispatch(changeSongListAction(res));
+    songsAPI.getSongCategoryList(params).then((res) => {
+      if (res.code === 200) {
+        dispatch(changeSongInfoAction(res));
+      }
     });
   };
 };

@@ -6,7 +6,7 @@ export const RecommendWrapper = styled.div`
     flex-wrap: wrap;
     justify-content: space-between;
     margin-top: 20px;
-    height:438px;
+    height: 438px;
     & > li {
       margin-bottom: 30px;
     }
