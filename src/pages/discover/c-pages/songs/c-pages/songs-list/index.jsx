@@ -27,7 +27,10 @@ export default memo(function SongsList() {
   useEffect(() => {
     dispatch(getSongListAction(defaultParams));
   }, []);
-  console.log('songCategoryInfo', songCategoryInfo);
+
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [songCategoryInfo && songCategoryInfo?.cat]);
 
   const onChange = (page) => {
     let newParams = {

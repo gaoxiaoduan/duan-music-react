@@ -11,7 +11,7 @@ export function handleSongsCategory(data) {
   });
 
   // 3.将subs添加到对应的类别中
-  for (let item of data.sub) {
+  for (let item of data.sub || []) {
     categoryData[item.category]?.subs.push(item);
   }
 

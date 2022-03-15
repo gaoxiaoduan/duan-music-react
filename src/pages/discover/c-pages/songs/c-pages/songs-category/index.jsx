@@ -1,11 +1,20 @@
 import React, { memo, useEffect } from 'react';
-import { NavLink } from 'react-router-dom';
+import { useDispatch, useSelector, shallowEqual } from 'react-redux';
+import { changeCurrentCategoryAction } from '../../store/actionCreators';
 
 import { SongsCategoryWapper } from './style';
 
 // 歌单分类，选择分类部分
 export default memo(function SongsCategoty(props) {
   const { category = [], handleColse } = props;
+
+  const dispatch = useDispatch();
+  const { currentCategory } = useSelector(
+    (state) => ({
+      currentCategory: state.getIn(['songs', 'currentCategory']),
+    }),
+    shallowEqual,
+  );
 
   const handleColseCallback = () => {
     handleColse();
@@ -18,18 +27,20 @@ export default memo(function SongsCategoty(props) {
     };
   });
 
+  // 选择分类事件
+  const handleSelectCategory = (selectName) => {
+    dispatch(changeCurrentCategoryAction(selectName));
+    handleColse();
+  };
+
   return (
-    <div
-      onClick={(e) => {
-        e.nativeEvent.stopImmediatePropagation();
-      }}
-    >
+    <div onClick={(e) => e.nativeEvent.stopImmediatePropagation()}>
       <SongsCategoryWapper>
         <i className="arrow sprite_icon" />
         <div className="songs_category_header">
-          <NavLink to="/discover/songs" className="all_btn sprite_button2">
+          <div className="all_btn sprite_button2" onClick={(e) => handleSelectCategory('全部')}>
             全部风格
-          </NavLink>
+          </div>
         </div>
 
         <div className="songs_category_body">
@@ -44,7 +55,12 @@ export default memo(function SongsCategoty(props) {
                   {item.subs.map((items) => {
                     return (
                       <React.Fragment key={items.name}>
-                        <a href="#">{items.name}</a>
+                        <span
+                          onClick={() => handleSelectCategory(items.name)}
+                          className={currentCategory === items.name ? 'active' : ''}
+                        >
+                          {items.name}
+                        </span>
                         <span className="divider">|</span>
                       </React.Fragment>
                     );

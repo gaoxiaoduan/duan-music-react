@@ -36,6 +36,10 @@ export const SongsCategoryWapper = styled.div`
       line-height: 26px;
       text-align: center;
       background-position: 0 -64px;
+      &:hover {
+        cursor: pointer;
+        text-decoration: underline;
+      }
     }
   }
 
@@ -75,9 +79,19 @@ export const SongsCategoryWapper = styled.div`
         padding: 14px 15px 0 15px;
         line-height: 24px;
         white-space: wrap;
-        a {
+        span {
           color: #333;
+          &:hover {
+            cursor: pointer;
+            text-decoration: underline;
+          }
         }
+        .active {
+          background: #a7a7a7;
+          color: #fff;
+          padding: 2px 6px;
+        }
+
         .divider {
           margin: 0 8px 0 10px;
           color: #d8d8d8;

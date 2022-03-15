@@ -12,7 +12,7 @@ export default (state = defaultState, action) => {
     case actionTypes.CHANGE_CATEGORY:
       return state.set('category', action.category);
     case actionTypes.CHANGE_CURRENT_CATEGORY:
-      return 2;
+      return state.set('currentCategory', action.currentCategory);
     case actionTypes.CHANGE_SONG_CATEGORY_INFO:
       return state.set('songCategoryInfo', action.songCategoryInfo);
     default:
