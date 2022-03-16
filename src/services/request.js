@@ -9,9 +9,10 @@ export default function request(option) {
       timeout,
     });
 
-    // 配置请求和响应拦截
+    // 配置请求拦截
     instance.interceptors.request.use(
       (config) => {
+        window.NProgress.start(); // 进度条开始
         // console.log('来到了request拦截success中');
         // 1.当发送网络请求时, 在页面中添加一个loading组件, 作为动画
 
@@ -21,7 +22,7 @@ export default function request(option) {
         // config.data = qs.stringify(config.data)
         // console.log(config);
 
-        // 4.等等
+        // 4.等等...
         return config;
       },
       (err) => {
@@ -30,8 +31,10 @@ export default function request(option) {
       },
     );
 
+    // 配置响应拦截
     instance.interceptors.response.use(
       (response) => {
+        window.NProgress.done(); // 进度条结束
         // console.log('来到了response拦截success中');
         return response.data;
       },

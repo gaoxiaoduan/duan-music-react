@@ -167,3 +167,8 @@ span:hover.link {
 .m0Auto {
   margin: 0 auto;
 }
+
+/* 进度条颜色 */
+#nprogress .bar {
+  background: #d72630 !important;
+}

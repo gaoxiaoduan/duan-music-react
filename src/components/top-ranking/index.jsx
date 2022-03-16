@@ -7,7 +7,7 @@ import { getSizeImage } from '@/utils/format-utils';
 import { TopRankingWrapper } from './style';
 
 export default memo(function HYTopRanking(props) {
-  const { info } = props;
+  const { info = [] } = props;
   const { tracks = [] } = info;
 
   const dispatch = useDispatch();
