@@ -24,7 +24,7 @@ export default memo(function NewAblum() {
 
   return (
     <AlbumWrapper>
-      <ThemeHeaderRCM title="新碟上架" />
+      <ThemeHeaderRCM title="新碟上架" showMore/>
       <div className="content">
         <div className="inner">
           <div className="arrow arrow-left sprite_02" onClick={(e) => carouselRef.current.prev()} />

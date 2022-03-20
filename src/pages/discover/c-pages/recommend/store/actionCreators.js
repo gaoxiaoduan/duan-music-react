@@ -54,9 +54,14 @@ export const getHotRecommedAction = (limit = 8) => {
   };
 };
 
-export const getNewAlbumAction = (limit = 10, offset = 0) => {
+export const getNewAlbumAction = (
+  params = {
+    limit: 10,
+    offset: 0,
+  },
+) => {
   return (dispatch) => {
-    recommendAPI.getNewAlbum(limit, offset).then((res) => {
+    recommendAPI.getNewAlbum(params).then((res) => {
       dispatch(changeNewAlbumAction(res));
     });
   };

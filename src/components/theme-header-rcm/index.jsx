@@ -4,11 +4,19 @@ import { Link } from 'react-router-dom';
 import { HeaderWrapper } from './style';
 
 export default memo(function ThemeHeaderRCM(props) {
-  const { title = '', keywords = [], moreLink = 'todo...', keywordClick = () => {} } = props;
+  const {
+    title = '', // 标题
+    keywords = [], // 关键字
+    keywordClick = () => {}, // 关键字链接跳转内容
+    showMore = false, // 是否显示更多, 默认不显示
+    moreLink = 'todo...', // 更多跳转目标
+    showTitleDot = true, // 是否显示标题前的dot，默认显示
+  } = props;
+
   return (
-    <HeaderWrapper className="sprite_02">
+    <HeaderWrapper className={showTitleDot ? 'sprite_02' : 'hideDot'}>
       <div className="left">
-        <div className="title">{title}</div>
+        <div className={`title ${!showTitleDot && 'hideDot'}`}>{title}</div>
 
         <div className="keyword">
           {keywords.map((item, index) => {
@@ -23,10 +31,13 @@ export default memo(function ThemeHeaderRCM(props) {
           })}
         </div>
       </div>
-      <div className="right">
-        <Link to={moreLink}>更多</Link>
-        <i className="icon sprite_02" />
-      </div>
+
+      {showMore && (
+        <div className="right">
+          <Link to={moreLink}>更多</Link>
+          <i className="icon sprite_02" />
+        </div>
+      )}
     </HeaderWrapper>
   );
 });

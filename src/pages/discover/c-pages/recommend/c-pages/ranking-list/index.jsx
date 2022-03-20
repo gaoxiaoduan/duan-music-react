@@ -26,7 +26,7 @@ export default memo(function RankingList() {
 
   return (
     <RankingWrapper>
-      <ThemeHeaderRCM title="榜单" />
+      <ThemeHeaderRCM title="榜单" showMore/>
       <div className="tops">
         <TopRanking info={upRankingList} />
         <TopRanking info={newSongList} />

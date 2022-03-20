@@ -10,6 +10,12 @@ export const HeaderWrapper = styled.div`
   justify-content: space-between;
   align-items: center;
 
+  /* 隐藏标题前的Dot */
+  &.hideDot {
+    margin-top: 7px;
+    padding: 0 0 12px 0;
+  }
+
   .left {
     display: flex;
     height: 35px;
@@ -18,6 +24,10 @@ export const HeaderWrapper = styled.div`
     .title {
       font-size: 20px;
       font-family: 'Microsoft Yahei', Arial, Helvetica, sans-serif;
+
+      &.hideDot {
+        font-size: 24px;
+      }
     }
 
     .keyword {
