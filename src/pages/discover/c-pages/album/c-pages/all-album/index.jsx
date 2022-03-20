@@ -1,4 +1,4 @@
-import React, { memo,useEffect } from 'react'
+import React, { memo, useEffect } from 'react';
 import { useDispatch, useSelector, shallowEqual } from 'react-redux';
 import { getAllAlbumsAction } from '../../store/actionCreators';
 
@@ -29,11 +29,9 @@ const AllAlbum = memo(() => {
         <div>4</div>
       </Content>
 
-      <div>
-        footer
-      </div>
+      <div>footer</div>
     </div>
-  )
-})
+  );
+});
 
-export default AllAlbum
+export default AllAlbum;
