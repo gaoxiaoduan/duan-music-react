@@ -8,7 +8,7 @@
     "test": "craco test",
     "eject": "react-scripts eject",
     "commit": "cz",
-    "prettier": "prettier --write .",
+    "prettier": "prettier --write '**/*.{less,js,jsx,tsx,ts,md,json}'",
     "eslint": "eslint src --ext .js,jsx --fix",
     "commitlint": "npm run eslint && npm run prettier",
     "prepare": "husky install"
