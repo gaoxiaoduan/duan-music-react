@@ -140,6 +140,14 @@ button {
   background: url(../img/playlist_sprite.png) no-repeat 0 9999px;
 }
 
+.sprite_mine {
+  background: url(../img/mine_sprite.png) no-repeat 0 9999px;
+}
+
+.sprite_friend {
+  background: url(../img/friend_sprite.jpg) no-repeat 0 9999px;
+}
+
 .image_cover {
   position: absolute;
   left: 0;

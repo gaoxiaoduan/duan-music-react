@@ -11,14 +11,16 @@ export default memo(function AppPagination(props) {
     if (type === 'prev') {
       return (
         <Button size="small" className="control prev">
-          <LeftOutlined />上一页
+          <LeftOutlined />
+          上一页
         </Button>
       );
     }
     if (type === 'next') {
       return (
         <Button size="small" className="control next">
-          下一页<RightOutlined />
+          下一页
+          <RightOutlined />
         </Button>
       );
     }
