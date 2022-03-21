@@ -8,8 +8,13 @@ const changeHotAlbumsAction = (res) => ({
 });
 
 const changeAllAlbumsAction = (res) => ({
-  type: actionTypes.HOT_ALBUMS,
-  allAlbums: res.weekData || [],
+  type: actionTypes.ALL_ALBUMS,
+  allAlbums: res.albums || [],
+});
+
+const changeAllAlbumsTotalAction = (total) => ({
+  type: actionTypes.ALL_ALBUMS_TOTAL,
+  allAlbumsTotal: total || 0,
 });
 
 /**
@@ -26,20 +31,15 @@ export const getHotAlbumsAction = () => {
 
 /**
  * 获取全部新碟
- * @param {*} params 默认参数为 10条，热门新碟
+ * @param {*} params limit offset area
  * @returns 全部新碟数据
  */
-export const getAllAlbumsAction = (
-  params = {
-    limit: 10,
-    offset: 0,
-    type: 'hot',
-  },
-) => {
+export const getAllAlbumsAction = (params) => {
   return (dispatch) => {
-    albumAPI.getNewAlbum(params).then((res) => {
+    albumAPI.getAllAlbum(params).then((res) => {
       // console.log(res);
       dispatch(changeAllAlbumsAction(res));
+      dispatch(changeAllAlbumsTotalAction(res.total));
     });
   };
 };

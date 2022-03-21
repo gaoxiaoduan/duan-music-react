@@ -19,7 +19,7 @@ const HotAlbum = memo(() => {
   useEffect(() => {
     dispatch(getHotAlbumsAction());
   }, []);
-  console.log('hotAlbums', hotAlbums);
+
   return (
     <div>
       <ThemeHeaderRCM title="热门新碟" showTitleDot={false} />

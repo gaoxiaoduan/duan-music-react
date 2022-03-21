@@ -11,6 +11,10 @@ export const AlbumWrapper = styled.div`
     height: ${(props) => props.size};
     overflow: hidden;
 
+    &:hover {
+      // TODO: hover时出现播放按钮，然后将歌曲添加进播放列表中
+    }
+
     img {
       width: ${(props) => props.size};
       height: ${(props) => props.size};
