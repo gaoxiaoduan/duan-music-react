@@ -1,70 +1,67 @@
-# Getting Started with Create React App
+# Quiet
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+本仓库为[网易云音乐web端](https://music.163.com/#)实现
 
-## Available Scripts
+[项目预览地址](https://duan-music-react.vercel.app/#/discover/recommend) 如果觉得效果还不错的话，欢迎留下你的Star✨，嘻嘻😁
 
-In the project directory, you can run:
+## 技术栈
 
-### `npm start`
+- react：框架选型
+- react-router：路由管理
+- redux + [immutable](https://github.com/gajus/redux-immutable#readme) + redux-thunk：状态管理
+- antd + [styled-components](https://styled-components.com/)：UI库+样式处理
+- axios：网络请求
+- webpack：构建工具
+- eslint + prettier：代码规范
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## 项目接口
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+> 感谢[Binaryify](https://github.com/Binaryify)对接口文档的不断维护与更新
 
-### `npm test`
+本项目采用4.2.0版本的接口，已经部署到vercel上，[接口文档地址](https://netease-cloud-music-api-4-2-0.vercel.app/)
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## 运行方式
 
-### `npm run build`
+- 克隆仓库 `git clone https://github.com/gaoxiaoduan/duan-music-react.git`
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- 进入项目文件夹 `cd duan-music-react`
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+- 安装依赖 `npm install`
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+- 运行项目 `npm start`
+- 提交代码`npm run commit`
 
-### `npm run eject`
+## 功能展示
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+已完成界面
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+- [x] 推荐模块
+- [x] 歌单模块
+- [x] 新碟上架
+- [x] 轮播图、歌曲播放、歌词解析滚动
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+todo:
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+- [ ] 排行榜
+- [ ] 主播电台
+- [ ] 播放详情页
+- [ ] 用户登录
+- [ ] ...
 
-## Learn More
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## 效果展示
 
-### Code Splitting
+|  |  |
+| ---- | ------------------------------------------------------------ |
+| ![](./docs/img/recommed.png) | ![](./docs/img/recommed02.png) |
+| ![](./docs/img/playList.png) | ![](./docs/img/songs.png) |
+| ![](./docs/img/newAlbum.png) | ![](./docs/img/mine.png) |
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
 
-### Analyzing the Bundle Size
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+## 最后
 
-### Making a Progressive Web App
+欢迎大家提issue，pr
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+本项目仅供学习交流使用，切勿用于商业用途，如有侵犯第三方版权问题及时联系我
