@@ -1,6 +1,10 @@
 import React, { memo, useEffect } from 'react';
 import { useDispatch, useSelector, shallowEqual } from 'react-redux';
-import { getRankingListAction, getRankingDeatilByIDAction } from '../../store/actionCreators';
+import {
+  getRankingListAction,
+  getRankingDeatilByIDAction,
+  changeUpdateFrequencyAction,
+} from '../../store/actionCreators';
 
 import { getSizeImage } from '@/utils/format-utils';
 import { RankingListWrapper } from './style';
@@ -23,12 +27,21 @@ const RankingList = memo(() => {
     dispatch(getRankingListAction());
   }, []);
 
+  useEffect(() => {
+    dispatch(changeUpdateFrequencyAction(featureList[0] && featureList[0].updateFrequency));
+  }, [featureList]);
+
+  const handleClick = (item) => {
+    dispatch(getRankingDeatilByIDAction(item.id));
+    dispatch(changeUpdateFrequencyAction(item.updateFrequency));
+  };
+
   const ListItem = (infoData = []) => {
     return infoData.map((item) => (
       <li
         key={item.id}
         className={item.id === currentRankingID ? 'rankingItem active' : 'rankingItem'}
-        onClick={() => dispatch(getRankingDeatilByIDAction(item.id))}
+        onClick={() => handleClick(item)}
       >
         <img src={getSizeImage(item.coverImgUrl, 40)} alt={item.name || ''} className="left_img" />
         <div className="right_description">

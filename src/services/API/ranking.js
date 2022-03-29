@@ -10,6 +10,17 @@ const rankingAPI = {
       url: '/toplist',
     });
   },
+
+  /**
+   * 获取榜单详细数据
+   * @returns
+   */
+  getRankingDetail(id) {
+    return request({
+      url: '/playlist/detail',
+      params: { id },
+    });
+  },
 };
 
 export default rankingAPI;

@@ -17,6 +17,17 @@ const changeCurrentRankingIDAction = (currentRankingID) => ({
   currentRankingID,
 });
 
+const changeCurrentRankingDetailAction = (currentRankingDetail) => ({
+  type: actionTypes.CHANGE_CURRENT_RANKING_DETAIL,
+  currentRankingDetail,
+});
+
+// 改变更新频率
+export const changeUpdateFrequencyAction = (updateFrequency) => ({
+  type: actionTypes.CHANGE_UPDATE_FREQUNCY,
+  updateFrequency,
+});
+
 // 获取榜单列表
 export const getRankingListAction = (params) => {
   return (dispatch, getState) => {
@@ -35,6 +46,10 @@ export const getRankingListAction = (params) => {
 export const getRankingDeatilByIDAction = (id) => {
   return (dispatch, getState) => {
     dispatch(changeCurrentRankingIDAction(id));
-    // TODO:改变榜单详情数据
+    rankingAPI.getRankingDetail(id).then((res) => {
+      if (res.code === 200) {
+        dispatch(changeCurrentRankingDetailAction(res.playlist));
+      }
+    });
   };
 };
