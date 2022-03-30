@@ -3,6 +3,7 @@ import { useDispatch, useSelector, shallowEqual } from 'react-redux';
 import { changePlayerSongAction } from '@/pages/player/store';
 import { Link } from 'react-router-dom';
 
+import MoreContent from '../more-content';
 import { formatMinuteSecond, getSizeImage } from '@/utils/format-utils';
 import { appMessage } from '@/utils/message-utils';
 import { RankingTableWrapper, RankingTitltWrapper, RankingTableCntWrapper } from './style';
@@ -132,6 +133,8 @@ const RankingTable = memo(() => {
             })}
           </tbody>
         </table>
+
+        {currentRankingDetail?.tracks?.length <= 50 && <MoreContent />}
       </RankingTableCntWrapper>
     </RankingTableWrapper>
   );
